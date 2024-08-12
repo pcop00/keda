@@ -149,7 +149,11 @@ func checkMetricStat(stat string) error {
 			return nil
 		}
 	}
-	return fmt.Errorf("metricStat '%s' is not one of %v", stat, types.Statistic("").Values())
+	if s == "p95" {
+		return nil
+	}
+
+	return fmt.Errorf("metricStat '%s' is not one of %v or P95", stat, types.Statistic("").Values())
 }
 
 func checkMetricUnit(unit string) error {
